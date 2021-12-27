@@ -5,6 +5,8 @@ package com.example.controllers;
 
 import java.util.ArrayList;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,8 @@ import com.example.services.HomeService;
  * @author panka
  *
  */
+@CrossOrigin("*")
+@RequestMapping("/share")
 @RestController
 public class HomeController {
 	
@@ -29,8 +33,9 @@ public class HomeController {
 		System.out.println("***************************************in controller***************************************");
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+	
 	@GetMapping(value = "/getMutualFunds")
+	@RolesAllowed({"sharehub-user", "sharehub-admin"})
 	public ArrayList<ShareHub> getMutualFunds(){
 		
 		return homeService.getMutualFunds();
