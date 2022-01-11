@@ -4,6 +4,7 @@
 package com.example.controllers;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.annotation.security.RolesAllowed;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.bean.ShareHub;
+import com.example.dao.DataDao;
 import com.example.services.HomeService;
 
 /**
@@ -30,7 +32,10 @@ import com.example.services.HomeService;
 public class HomeController {
 	
 	@Autowired
-	private HomeService homeService;
+	HomeService homeService;
+	
+	@Autowired
+	DataDao dataDao;
 	
 	static {
 		System.out.println("***************************************in controller***************************************");
@@ -41,7 +46,15 @@ public class HomeController {
 	@RolesAllowed({"sharehub-user", "sharehub-admin"})
 	public ArrayList<ShareHub> getMutualFunds(){
 		
-		return homeService.getMutualFunds();
+		  ArrayList<ShareHub> mutualFundList = new ArrayList<>();
+		  
+		  Iterable<ShareHub> itr = dataDao.findAll(); 
+		  itr.forEach(mutualFundList::add);
+		  
+		  return mutualFundList;
+		 
+		
+		//return homeService.getMutualFunds();
 	}
 	
 	

@@ -27,6 +27,7 @@ public class ResourceServerConfig extends KeycloakWebSecurityConfigurerAdapter {
 	            .anyRequest()
 	            .permitAll();
 	        http.csrf().disable();
+	        http.headers().frameOptions().sameOrigin();
 	    }
 
 	    @Autowired

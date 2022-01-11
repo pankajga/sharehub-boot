@@ -3,12 +3,21 @@
  */
 package com.example.bean;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
 /**
  * @author panka
  *
  */
+
+
+@Entity
 public class ShareHub {
 	
+	@Id
 	private String mfName;
 	private String mfTagLine;
 	private String mfReturns;
